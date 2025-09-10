@@ -1,14 +1,24 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useAssessment } from "@/contexts/AssessmentContext";
+import { AssessmentIntro } from "./AssessmentIntro";
+import { AssessmentSection } from "./AssessmentSection";
+import { AssessmentResults } from "./AssessmentResults";
 
 const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const { state } = useAssessment();
+
+  // Route to appropriate assessment page based on current section
+  switch (state.currentSection) {
+    case 0:
+      return <AssessmentIntro />;
+    case 1:
+    case 2: 
+    case 3:
+      return <AssessmentSection />;
+    case 4:
+      return <AssessmentResults />;
+    default:
+      return <AssessmentIntro />;
+  }
 };
 
 export default Index;
